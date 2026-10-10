@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<!-- Updated viewport to lock scaling on mobile devices -->
+<!-- Locked viewport to prevent zooming and screen drifting on mobile -->
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>R$ Rush™ | Play Skill Runner & Instant R$ Payouts</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +51,6 @@ body {
   font-size: 13px;
   font-weight: 600;
   overflow: hidden;
-  white-space: nowrap;
   display: flex;
   align-items: center;
   box-shadow: 0 2px 10px rgba(0,0,0,0.4);
@@ -71,6 +70,9 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
 }
 .pulse-dot {
   width: 7px; height: 7px;
@@ -80,6 +82,14 @@ body {
   animation: pulse 1.2s infinite;
 }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.3;transform:scale(0.8);} }
+
+/* Ticker Mask to stop text overwriting the tag */
+.ticker-track-container {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  white-space: nowrap;
+}
 .ticker-track {
   display: inline-block;
   white-space: nowrap;
@@ -402,6 +412,8 @@ nav {
   max-width: 1200px;
   margin: 0 auto 70px;
   padding: 0 24px;
+  overflow: hidden; /* Added to bound contents on mobile */
+  box-sizing: border-box;
 }
 .section-head { text-align: center; margin-bottom: 40px; }
 .section-head h3 { font-size: 38px; text-shadow: 0 3px 0 var(--pink); }
@@ -451,6 +463,8 @@ nav {
   grid-template-columns: 1.2fr 0.8fr;
   gap: 30px;
   align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
 }
 @media (max-width: 900px) { .proof-container { grid-template-columns: 1fr; } }
 
@@ -460,6 +474,9 @@ nav {
   border-radius: 24px;
   padding: 24px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  /* Fixes horizontal overflow by allowing internal scrolling */
+  max-width: 100%;
+  overflow-x: auto; 
 }
 .live-table-header {
   display: flex;
@@ -467,7 +484,11 @@ nav {
   align-items: center;
   margin-bottom: 18px;
 }
-.table-payouts { width: 100%; border-collapse: collapse; }
+.table-payouts { 
+  width: 100%; 
+  border-collapse: collapse; 
+  min-width: 450px; /* Maintains table structure so it scrolls nicely on mobile */
+}
 .table-payouts th {
   text-align: left;
   padding: 10px 12px;
@@ -509,6 +530,8 @@ nav {
   border-radius: 24px;
   padding: 30px 24px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  max-width: 100%; /* Ensure it bounds to the device width */
+  box-sizing: border-box;
 }
 .security-list { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 14px; }
 .security-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; }
@@ -710,19 +733,22 @@ footer {
   color: var(--mint);
 }
 
-@media (max-width: 600px) {
-  #game-container { height: 480px; }
-  .card h1 { font-size: 42px; }
-  .nav-actions .btn-primary { display: none; }
-}
-
 /* --- MOBILE OPTIMIZATION & FULLSCREEN ADDITIONS --- */
 @media (max-width: 768px) {
   .cabinet-header, .cabinet-footer { display: none !important; }
   .arcade-cabinet { border: none; border-radius: 0; box-shadow: none; }
   .game-stage-wrapper { padding: 0; margin: 0; max-width: 100%; }
   #game-container { height: 100vh; border-radius: 0; }
+  
+  /* Additional pad tweaks for mobile viewing */
+  .section-wrapper { padding: 0 16px; }
+  .live-table-card { padding: 16px; }
+  
+  .nav-actions .btn-primary { display: none; }
+  .card h1 { font-size: 42px; }
 }
+
+/* Fullscreen DOM Hooks */
 #game-container:fullscreen { width: 100vw !important; height: 100vh !important; background: #120524; }
 #game-container:-webkit-full-screen { width: 100vw !important; height: 100vh !important; background: #120524; }
 </style>
@@ -735,14 +761,16 @@ footer {
   <div class="ticker-tag">
     <div class="pulse-dot"></div> Live Activity
   </div>
-  <div class="ticker-track" id="ticker-content">
-    <!-- Populated by JavaScript -->
-    ⚡ <strong>Valkyrie_X9</strong> just cashed out <strong>+240 R$</strong> via Group Funds &nbsp;•&nbsp; 
-    ⚡ <strong>BloxGamer2024</strong> claimed <strong>+650 R$</strong> &nbsp;•&nbsp; 
-    ⚡ <strong>iiOmg_Jessie</strong> earned <strong>+120 R$</strong> &nbsp;•&nbsp; 
-    ⚡ <strong>KreekFan_99</strong> claimed <strong>+800 R$</strong> &nbsp;•&nbsp; 
-    ⚡ <strong>ShadowNinja</strong> cashed out <strong>+350 R$</strong> &nbsp;•&nbsp; 
-    ⚡ <strong>CyberQueen</strong> earned <strong>+500 R$</strong>
+  <div class="ticker-track-container">
+    <div class="ticker-track" id="ticker-content">
+      <!-- Populated by JavaScript -->
+      ⚡ <strong>Valkyrie_X9</strong> just cashed out <strong>+240 R$</strong> via Group Funds &nbsp;•&nbsp; 
+      ⚡ <strong>BloxGamer2024</strong> claimed <strong>+650 R$</strong> &nbsp;•&nbsp; 
+      ⚡ <strong>iiOmg_Jessie</strong> earned <strong>+120 R$</strong> &nbsp;•&nbsp; 
+      ⚡ <strong>KreekFan_99</strong> claimed <strong>+800 R$</strong> &nbsp;•&nbsp; 
+      ⚡ <strong>ShadowNinja</strong> cashed out <strong>+350 R$</strong> &nbsp;•&nbsp; 
+      ⚡ <strong>CyberQueen</strong> earned <strong>+500 R$</strong>
+    </div>
   </div>
 </div>
 
@@ -943,8 +971,8 @@ footer {
     <div class="step-item">
       <div class="step-num">03</div>
       <div class="feat-icon">🚀</div>
-      <h4>Instant Payout to Roblox</h4>
-      <p>Hit "Withdraw", provide your Roblox username, and our payout bot delivers the R$ directly.</p>
+      <h4>Instant Payout</h4>
+      <p>Hit "Withdraw", and our payout bot delivers it directly.</p>
     </div>
   </div>
 </section>
@@ -958,12 +986,12 @@ footer {
 
   <div class="faq-box">
     <div class="faq-q">Do you need my Roblox password?</div>
-    <div class="faq-a">No, absolutely not. Legitimate payouts only require your public Roblox username so our payout system knows where to send the group funds. Never give your password to anyone.</div>
+    <div class="faq-a">No, absolutely not. Never give your password to anyone.</div>
   </div>
 
   <div class="faq-box">
     <div class="faq-q">How fast are the payouts sent?</div>
-    <div class="faq-a">Withdrawals are automated. Most transactions reflect in your Roblox transaction ledger within 1 to 2 minutes after claiming.</div>
+    <div class="faq-a">Withdrawals are automated. Most transactions reflect in your walet transaction ledger within 1 to 2 minutes after claiming.</div>
   </div>
 
   <div class="faq-box">
@@ -1471,10 +1499,11 @@ fit();
 function start() {
   if (state === 'play') return;
 
+  // Safe Request Fullscreen - Will safely fail without breaking game if blocked by Safari.
   try {
     const gc = document.getElementById('game-container');
     if (gc.requestFullscreen) {
-      gc.requestFullscreen().catch(e => {}); // Silent catch prevents blocking the script
+      gc.requestFullscreen().catch(e => {}); 
     } else if (gc.webkitRequestFullscreen) {
       gc.webkitRequestFullscreen();
     }
