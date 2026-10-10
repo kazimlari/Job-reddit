@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!-- Updated viewport to lock scaling on mobile devices -->
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>R$ Rush™ | Play Skill Runner & Instant R$ Payouts</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -714,6 +715,16 @@ footer {
   .card h1 { font-size: 42px; }
   .nav-actions .btn-primary { display: none; }
 }
+
+/* --- MOBILE OPTIMIZATION & FULLSCREEN ADDITIONS --- */
+@media (max-width: 768px) {
+  .cabinet-header, .cabinet-footer { display: none !important; }
+  .arcade-cabinet { border: none; border-radius: 0; box-shadow: none; }
+  .game-stage-wrapper { padding: 0; margin: 0; max-width: 100%; }
+  #game-container { height: 100vh; border-radius: 0; }
+}
+#game-container:fullscreen { width: 100vw !important; height: 100vh !important; background: #120524; }
+#game-container:-webkit-full-screen { width: 100vw !important; height: 100vh !important; background: #120524; }
 </style>
 </head>
 
@@ -1033,7 +1044,6 @@ function updateWalletDisplay(newScore) {
     navBalanceElem.textContent = globalBalance.toFixed(2);
   }
   
-  // Wrapped in a null check to fix the game loop crash
   const modalAvailableElem = document.getElementById('modal-available');
   if (modalAvailableElem) {
     modalAvailableElem.textContent = globalBalance.toFixed(2) + ' R$';
@@ -1105,6 +1115,15 @@ setInterval(triggerRandomPayoutPopup, 6500);
 
 /* Withdrawal Modal Handling */
 function openWithdrawModal() {
+  try {
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(()=>{});
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+  } catch(e) {}
   document.getElementById('withdraw-modal').style.display = 'flex';
 }
 function closeWithdrawModal() {
@@ -1451,6 +1470,16 @@ fit();
 
 function start() {
   if (state === 'play') return;
+
+  try {
+    const gc = document.getElementById('game-container');
+    if (gc.requestFullscreen) {
+      gc.requestFullscreen().catch(e => {}); // Silent catch prevents blocking the script
+    } else if (gc.webkitRequestFullscreen) {
+      gc.webkitRequestFullscreen();
+    }
+  } catch(e) {}
+
   if (!muted) bgm.play();
   ob.forEach(o => scene.remove(o.m));
   cn.forEach(c => scene.remove(c.m));
