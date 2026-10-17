@@ -1,1 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Shopper Reward - LIVE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f8f6; /* Soft cream tint */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding-bottom: 90px;
+            overflow-x: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 420px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- Live Badge --- */
+        .live-badge {
+            background: #1d1d1d;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            align-self: flex-start;
+        }
+        .blink-dot {
+            width: 8px;
+            height: 8px;
+            background: #ff4d4d;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+        /* --- Hero Art --- */
+        .gift-card-img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            /* Coach Sleek Black Gradient */
+            background: linear-gradient(135deg, #2b2b2b 0%, #000000 100%);
+            aspect-ratio: 1.6;
+            display: flex;
+            align-items: center; justify-content: center;
+            position: relative; overflow: hidden; margin-bottom: 20px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .card-icon {
+            font-size: 80px;
+            color: #ffffff;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.2);
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        @keyframes floatIcon {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(3deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .price-tag { 
+            position: absolute;
+            bottom: 15px; right: 15px; 
+            color: #000000; 
+            font-weight: 900; font-size: 1.4rem; 
+            background: rgba(255,255,255,0.95);
+            padding: 5px 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .logo-text { 
+            position: absolute;
+            top: 15px; left: 15px;
+            color: #ffffff; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        h1 { font-size: 1.4rem; font-weight: 800; text-align: center; color: #111; margin-bottom: 5px; }
+        .subtitle { font-size: 0.9rem; color: #666; text-align: center; margin-bottom: 20px; }
+
+        /* --- Cards --- */
+        .info-card {
+            background: white;
+            width: 100%; border-radius: 16px;
+            padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            margin-bottom: 12px;
+        }
+        .card-header { color: #1d1d1d; font-weight: 700; font-size: 1rem; margin-bottom: 15px; display: flex; justify-content: space-between; }
+
+        /* Checklist */
+        .list-item { display: flex; align-items: flex-start; margin-bottom: 15px; }
+        .list-item:last-child { margin-bottom: 0; }
+        .icon-check { 
+            background-color: #000000;
+            color: #ffffff;
+            width: 20px;
+            height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; margin-right: 12px; flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .text-content h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 2px; }
+        .text-content p { font-size: 0.75rem; color: #777; }
+
+        /* Common Questions */
+        .question-item { padding: 12px 0; border-bottom: 1px solid #eee; cursor: pointer; }
+        .question-item:last-child { border-bottom: none; }
+        .q-header { display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 0.9rem; }
+        .q-answer { 
+            max-height: 0;
+            overflow: hidden; transition: max-height 0.3s ease; 
+            color: #666; font-size: 0.85rem; margin-top: 0;
+        }
+        .question-item.active .q-answer { max-height: 100px; margin-top: 10px; }
+        .question-item.active .fa-plus { transform: rotate(45deg); transition: transform 0.3s; }
+
+        /* --- Footer --- */
+        .sticky-footer {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            background: white; padding: 15px;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
+            display: flex; justify-content: center;
+            z-index: 100;
+        }
+        .claim-btn {
+            background-color: #000000;
+            color: #ffffff; 
+            width: 100%; max-width: 400px;
+            padding: 16px; border: none; border-radius: 12px;
+            font-size: 1.2rem; font-weight: 700; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            animation: pulseBtn 2s infinite;
+        }
+        @keyframes pulseBtn { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+
+        /* --- Toast Notification --- */
+        .toast {
+            position: fixed;
+            top: 15px; right: 15px;
+            background: rgba(0,0,0,0.9); color: white;
+            padding: 10px 15px; border-radius: 8px;
+            font-size: 0.75rem; display: flex; align-items: center;
+            gap: 10px;
+            transform: translateX(150%); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 999;
+        }
+        .toast.show { transform: translateX(0); }
+
+    </style>
+</head>
+<body>
+
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-gift" style="color: #c5a059;"></i>
+        <span id="toast-text">User claimed reward</span>
+    </div>
+
+    <div class="mobile-container">
+        
+        <div class="live-badge">
+            <div class="blink-dot"></div>
+            LIVE: <span id="viewer-count">1,245</span> viewing
+        </div>
+
+        <div class="gift-card-img">
+            <div class="logo-text"><i class="fa-solid fa-star"></i> COACH REWARDS</div>
+            <i class="fa-solid fa-bag-shopping card-icon"></i>
+            <div class="price-tag">$500</div>
+        </div>
+
+        <h1>Coach Gift Card</h1>
+        <p class="subtitle">Complete the steps below to unlock your shopping spree</p>
+
+        <div class="info-card">
+            <div class="card-header">Quick Start Guide</div>
+            <div class="list-item">
+                <div class="icon-check"><i class="fa-solid fa-check"></i></div>
+                <div class="text-content"><h4>Complete 4-5 deals</h4><p>More deals, bigger reward</p></div>
+            </div>
+            <div class="list-item">
+                <div class="icon-check"><i class="fa-solid fa-check"></i></div>
+                <div class="text-content"><h4>Enter a valid email</h4><p>For instant code delivery</p></div>
+            </div>
+            <div class="list-item">
+                <div class="icon-check"><i class="fa-solid fa-check"></i></div>
+                <div class="text-content"><h4>Must be 18 years or older</h4><p>Required to participate</p></div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-header">Common Questions</div>
+            
+            <div class="question-item" onclick="toggleAnswer(this)">
+                <div class="q-header">
+                    <span>How long do the deals take?</span>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="q-answer">
+                    Usually 15-30 minutes. You need to complete the required number of deals to verify your status.
+                </div>
+            </div>
+
+            <div class="question-item" onclick="toggleAnswer(this)">
+                <div class="q-header">
+                    <span>What kind of deals are included?</span>
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="q-answer">
+                    Free trials, app installs, surveys, and deals.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="sticky-footer">
+        <button class="claim-btn" onclick="window.location.href='https://offertrk.org/cl/i/j749oo'">Claim $500 Now</button>
+    </div>
+
+    <script>
+        // --- FAQ TOGGLE LOGIC ---
+        function toggleAnswer(element) {
+            element.classList.toggle('active');
+        }
+
+        // --- NAMES FOR NOTIFICATIONS ---
+        const names = [
+            "Jordan S.", "Mikey P.", "Sarah J.", "BigMike", 
+            "Emily R.", "David K.", "Jess W.", "Chris B.", "Mandy",
+            "Latoya J.", "Maria G.", "Bella C.", "Sophie L.", 
+            "Ethan M.", "Liam N.", "Ava K.", "Noah J.", "Mason F.", 
+            "Mia H.", "Charlie Z.", "Amy C.", "James V.", "Harper B.", "Jason D."
+        ];
+
+        // --- VIEWER COUNT FLUCTUATION ---
+        const viewerCountEl = document.getElementById('viewer-count');
+        let viewers = 1245;
+
+        setInterval(() => {
+            const change = Math.floor(Math.random() * 15) - 5; 
+            viewers += change;
+            viewerCountEl.innerText = viewers.toLocaleString();
+        }, 3000);
+
+        // --- POPUP NOTIFICATION (Toast) ---
+        function showToast() {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toast-text');
+            const cities = ["NY", "CA", "TX", "FL", "OH", "IL", "GA", "WA", "AZ"];
+            const city = cities[Math.floor(Math.random() * cities.length)];
+            const user = names[Math.floor(Math.random() * names.length)].split(' ')[0];
+            
+            toastText.innerHTML = `<strong>${user}</strong> (from ${city}) claimed <strong>$500</strong>`;
+            
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 4000);
+        }
+
+        setInterval(showToast, 7000);
+    </script>
+</body>
+</html>
