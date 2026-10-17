@@ -1,1770 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<!-- Locked viewport to prevent zooming and screen drifting on mobile -->
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>R$ Rush™ | Play Skill Runner & Instant R$ Payouts</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get $500 towards Target</title>
+<meta name="description" content="Complete partner Deals to earn a $500 Target reward. Offer not sponsored or endorsed by Target.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Lilita+One&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg-deep: #120524;
-  --bg-card: rgba(35, 13, 66, 0.72);
-  --bg-card-hover: rgba(50, 18, 94, 0.85);
-  --border-glow: rgba(255, 79, 163, 0.35);
-  --mint: #3dffb0;
-  --mint-glow: rgba(61, 255, 176, 0.4);
-  --pink: #ff4fa3;
-  --pink-dark: #c91f48;
-  --cyan: #38e1ff;
-  --sun: #ffc857;
-  --text-main: #ffffff;
-  --text-muted: #b9a9d6;
-  --glass: rgba(255, 255, 255, 0.08);
+:root{
+  --red:#d3112d; --red-dark:#a80d24; --ink:#1b1b1f; --muted:#5f6068;
+  --line:#e6e4e1; --paper:#faf8f6; --white:#fff; --gold:#f5c542; --panel:#26262a;
+  --focus:#1a5fd0;
 }
+@media (prefers-color-scheme: dark){ :root{} }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{font-family:'Figtree',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-[hidden] { display: none !important; }
+/* top bar */
+.top{background:var(--white);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{font-weight:800;font-size:1.05rem;letter-spacing:-.01em}
+.brand span{color:var(--red)}
+.top small{color:var(--muted);font-size:.78rem}
 
-body {
-  background-color: var(--bg-deep);
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(255, 79, 163, 0.15), transparent 40%),
-    radial-gradient(circle at 90% 70%, rgba(56, 225, 255, 0.15), transparent 45%),
-    linear-gradient(180deg, #180733 0%, #0d031a 100%);
-  color: var(--text-main);
-  font-family: 'Fredoka', system-ui, sans-serif;
-  overflow-x: hidden;
-  line-height: 1.5;
-}
+/* hero */
+.hero{background:var(--white);padding:28px 0 36px;border-bottom:1px solid var(--line)}
+.reward-card{width:210px;margin:0 auto 22px;background:var(--red);color:#fff;border-radius:12px;padding:14px 16px 0;box-shadow:0 14px 30px -12px rgba(211,17,45,.55);overflow:hidden}
+.reward-card .row{display:flex;align-items:center;gap:10px;justify-content:center}
+.reward-card svg{width:52px;height:52px;flex:none}
+.reward-card .amt{font-size:3rem;font-weight:700;line-height:1;letter-spacing:-.03em}
+.reward-card .amt sup{font-size:1.4rem;vertical-align:top;position:relative;top:4px;margin-right:2px}
+.reward-card .name{font-weight:800;letter-spacing:.06em;font-size:1.3rem;text-align:center;margin-top:4px;padding-bottom:10px}
+.reward-card .disc{background:#d9d9dc;color:#222;font-size:.6rem;font-weight:700;text-align:center;padding:3px 4px;margin:0 -16px}
+h1{font-size:clamp(1.9rem,6.5vw,2.6rem);line-height:1.1;font-weight:800;letter-spacing:-.025em;text-align:center}
+.lede{text-align:center;color:var(--muted);margin:10px auto 24px;max-width:46ch}
 
-/* Typography Helpers */
-.disp { font-family: 'Lilita One', cursive, sans-serif; letter-spacing: 0.5px; }
+/* quiz */
+.quiz{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:22px 20px 24px;box-shadow:0 8px 24px -16px rgba(0,0,0,.25)}
+.progress{display:flex;align-items:center;gap:8px;margin-bottom:20px}
+.progress i{flex:1;height:5px;border-radius:3px;background:#dde0e4;transition:background .25s}
+.progress i.on{background:#1565d8}
+.progress span{font-size:.8rem;color:var(--muted);white-space:nowrap;margin-left:4px}
+.q{font-size:1.15rem;font-weight:700;text-align:center;margin-bottom:18px}
+.opts{display:grid;gap:12px}
+.opt{display:flex;align-items:center;gap:14px;width:100%;padding:0 22px;height:58px;border-radius:30px;border:1px solid #d6d9e6;background:#f2f4fc;font:inherit;font-size:1.05rem;font-weight:700;color:var(--ink);cursor:pointer;transition:background .15s,border-color .15s,transform .1s}
+.opt:hover{background:#e7ebfa;border-color:#b9c2ec}
+.opt:active{transform:scale(.99)}
+.opt svg{width:26px;height:26px;stroke:#1565d8;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.opt b{flex:1;text-align:center;margin-right:40px}
+.step[hidden]{display:none}
 
-/* Top Announcement Ticker */
-.live-ticker-bar {
-  background: linear-gradient(90deg, #ff4fa3, #7a2be2, #38e1ff);
-  padding: 8px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-  position: relative;
-  z-index: 50;
-}
-.ticker-tag {
-  background: #140636;
-  color: var(--mint);
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-size: 11px;
-  text-transform: uppercase;
-  margin-right: 15px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 10;
-}
-.pulse-dot {
-  width: 7px; height: 7px;
-  background: var(--mint);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--mint);
-  animation: pulse 1.2s infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.3;transform:scale(0.8);} }
+/* email step */
+.email-form label{display:block;font-weight:700;text-align:center;font-size:1.15rem;margin-bottom:6px}
+.email-form .hint{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:16px}
+.field{width:100%;height:54px;border:1.5px solid #c9ccd3;border-radius:12px;padding:0 16px;font:inherit;font-size:1rem;background:#fff}
+.field:focus{border-color:var(--focus);outline:none;box-shadow:0 0 0 3px rgba(26,95,208,.2)}
+.field[aria-invalid="true"]{border-color:var(--red)}
+.err{color:var(--red-dark);font-size:.85rem;margin-top:6px;min-height:1.2em}
+.btn{display:block;width:100%;border:0;border-radius:12px;background:var(--red);color:#fff;font:inherit;font-weight:800;font-size:1.08rem;padding:16px;cursor:pointer;text-align:center;text-decoration:none;transition:background .15s}
+.btn:hover{background:var(--red-dark)}
+.consent{font-size:.75rem;color:var(--muted);margin-top:12px;text-align:center}
+.consent a{color:var(--muted)}
+.under18{text-align:center;padding:10px 0}
+.under18 p{color:var(--muted);margin-top:8px}
 
-/* Ticker Mask to stop text overwriting the tag */
-.ticker-track-container {
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  white-space: nowrap;
-}
-.ticker-track {
-  display: inline-block;
-  white-space: nowrap;
-  animation: marquee 32s linear infinite;
-}
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+/* sections */
+section.block{padding:44px 0;border-bottom:1px solid var(--line)}
+h2{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-bottom:10px}
+.block p{color:var(--muted)}
+.deals-list{list-style:none;margin-top:18px;display:grid;gap:12px}
+.deals-list li{display:flex;gap:12px;align-items:flex-start;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.deals-list svg{width:22px;height:22px;flex:none;margin-top:2px;stroke:var(--red);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.deals-list strong{display:block;font-size:.95rem}
+.deals-list span{font-size:.88rem;color:var(--muted)}
 
-/* Navigation */
-nav {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 40;
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: #fff;
-}
-.brand-icon {
-  width: 44px; height: 44px;
-  background: linear-gradient(135deg, var(--pink), #7a2be2);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 14px rgba(255, 79, 163, 0.4);
-}
-.brand h2 { font-size: 26px; }
-.brand h2 span { color: var(--mint); }
+/* reward table */
+.table-shell{background:#161618;border-radius:18px;padding:18px;margin-top:20px}
+table{width:100%;border-collapse:separate;border-spacing:0;color:#eee;text-align:center;font-style:italic;font-weight:600}
+th{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:16px 6px;line-height:1.35;border-bottom:1px solid #3b3b40;background:var(--panel)}
+td{padding:11px 6px;font-size:1rem;background:var(--panel)}
+th:first-child{border-top-left-radius:12px}th:last-child{border-top-right-radius:12px}
+tr:last-child td:first-child{border-bottom-left-radius:12px}tr:last-child td:last-child{border-bottom-right-radius:12px}
+th.rv,td.rv{border-left:2px solid var(--gold);border-right:2px solid var(--gold);color:#fff;font-weight:800}
+th.rv{border-top:2px solid var(--gold);border-top-left-radius:12px;border-top-right-radius:12px}
+tr:last-child td.rv{border-bottom:2px solid var(--gold);border-bottom-left-radius:12px;border-bottom-right-radius:12px}
+tr.hl td{background:#33333a}
+td sup{font-size:.6em;font-weight:600;opacity:.8}
+.fine{font-size:.78rem;color:var(--muted);margin-top:14px}
 
-.nav-actions { display: flex; align-items: center; gap: 16px; }
-.wallet-badge {
-  background: rgba(42, 10, 74, 0.7);
-  border: 2px solid rgba(61, 255, 176, 0.4);
-  padding: 8px 18px;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-}
-.wallet-val { color: var(--mint); font-family: 'Lilita One'; font-size: 20px; }
+/* faq */
+details{background:var(--white);border:1px solid var(--line);border-radius:12px;margin-top:10px}
+summary{cursor:pointer;list-style:none;padding:15px 16px;font-weight:700;display:flex;justify-content:space-between;gap:12px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--red);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 16px 16px;font-size:.92rem}
 
-/* Buttons */
-.btn-primary {
-  background: linear-gradient(#6dffd0, #2fe0a0);
-  color: #0c3327;
-  font-family: 'Lilita One';
-  font-size: 19px;
-  padding: 10px 24px;
-  border-radius: 999px;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 5px 0 #14997a, 0 10px 20px rgba(61, 255, 176, 0.3);
-  transition: all 0.15s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  text-decoration: none;
-}
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #14997a, 0 14px 24px rgba(61, 255, 176, 0.4); }
-.btn-primary:active { transform: translateY(3px); box-shadow: 0 2px 0 #14997a; }
+/* cta band */
+.cta-band{padding:44px 0 36px;text-align:center}
+.cta-band .btn{max-width:360px;margin:18px auto 0}
 
-.btn-secondary {
-  background: linear-gradient(#ff8a6b, #ff4fa3);
-  color: #fff;
-  font-family: 'Lilita One';
-  font-size: 19px;
-  padding: 10px 24px;
-  border-radius: 999px;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 5px 0 var(--pink-dark), 0 10px 20px rgba(255, 79, 163, 0.3);
-  transition: all 0.15s;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--pink-dark); }
-.btn-secondary:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--pink-dark); }
-
-/* Hero Section */
-.hero {
-  max-width: 1200px;
-  margin: 20px auto 40px;
-  padding: 0 24px;
-  text-align: center;
-}
-.trust-pill-group {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-.trust-badge {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(8px);
-  padding: 6px 16px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #f1edfa;
-}
-.trust-badge.safe { border-color: rgba(61, 255, 176, 0.5); color: var(--mint); }
-
-.hero h1 {
-  font-size: clamp(38px, 6.5vw, 68px);
-  line-height: 1.05;
-  margin-bottom: 18px;
-  text-shadow: 0 4px 0 var(--pink), 0 8px 0 #671cb0, 0 16px 30px rgba(0,0,0,0.5);
-}
-.hero h1 span { color: var(--mint); }
-.hero-sub {
-  font-size: clamp(16px, 2.2vw, 20px);
-  color: var(--text-muted);
-  max-width: 680px;
-  margin: 0 auto 30px;
-  font-weight: 500;
-}
-
-/* Arcade Console Stage (Game Box) */
-.game-stage-wrapper {
-  max-width: 980px;
-  margin: 0 auto 60px;
-  padding: 0 16px;
-}
-.arcade-cabinet {
-  background: linear-gradient(180deg, #32105e 0%, #1a0833 100%);
-  border-radius: 32px;
-  border: 3px solid rgba(255, 79, 163, 0.4);
-  box-shadow: 0 16px 0 #120424, 0 30px 60px rgba(0,0,0,0.6), inset 0 2px 10px rgba(255,255,255,0.2);
-  overflow: hidden;
-  position: relative;
-}
-.cabinet-header {
-  background: rgba(20, 6, 40, 0.8);
-  padding: 12px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid rgba(255,255,255,0.1);
-}
-.cabinet-lights { display: flex; gap: 8px; }
-.cab-light { width: 12px; height: 12px; border-radius: 50%; }
-.cab-red { background: #ff4d5e; }
-.cab-yellow { background: var(--sun); }
-.cab-green { background: var(--mint); }
-.cab-title { font-size: 15px; font-weight: 700; color: #eedaff; letter-spacing: 1px; }
-
-/* The Game Frame */
-#game-container {
-  width: 100%;
-  height: 560px;
-  position: relative;
-  background: #2b1055;
-  overflow: hidden;
-}
-#c { width: 100%; height: 100%; display: block; }
-
-/* Internal Game Overlays (Preserved & Enhanced) */
-#hud {
-  position: absolute;
-  left: 0; right: 0;
-  top: 16px;
-  padding: 0 20px;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  pointer-events: none;
-  z-index: 10;
-}
-.pill {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 999px;
-  background: rgba(35, 13, 66, 0.65);
-  border: 2px solid rgba(255,255,255,0.25);
-  backdrop-filter: blur(8px);
-  font-size: 24px;
-  line-height: 1;
-}
-.pill.sm { font-size: 15px; margin-left: auto; font-family: 'Fredoka', sans-serif; font-weight: 700; }
-.bump { animation: bump .25s ease-out; }
-@keyframes bump { 40% { transform: scale(1.18); } }
-
-#mute {
-  pointer-events: auto;
-  width: 42px; height: 42px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.3);
-  background: rgba(35, 13, 66, 0.7);
-  color: #fff;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-}
-
-.pop {
-  position: absolute;
-  z-index: 15;
-  pointer-events: none;
-  font-family: 'Lilita One', sans-serif;
-  font-size: 32px;
-  color: var(--mint);
-  text-shadow: 0 3px 0 #180733, 0 0 16px rgba(61,255,176,0.9);
-  animation: rise .9s ease-out forwards;
-}
-@keyframes rise {
-  0% { opacity:1; transform: translate(-50%, -50%) scale(0.6); }
-  20% { opacity:1; transform: translate(-50%, -90%) scale(1.2); }
-  100% { opacity:0; transform: translate(-50%, -240%) scale(1); }
-}
-
-#flash {
-  position: absolute; inset: 0;
-  pointer-events: none; z-index: 12;
-  opacity: 0;
-  background: radial-gradient(transparent 30%, rgba(255, 40, 80, 0.7));
-}
-#flash.on { animation: fl .7s ease-out; }
-@keyframes fl { from { opacity: 1; } to { opacity: 0; } }
-
-#screen {
-  position: absolute;
-  inset: 0;
-  z-index: 20;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(14, 4, 30, 0.65);
-  backdrop-filter: blur(6px);
-  padding: 20px;
-}
-.card {
-  width: min(92%, 400px);
-  text-align: center;
-  padding: 28px 24px;
-  border-radius: 30px;
-  background: rgba(45, 14, 84, 0.88);
-  border: 3px solid rgba(255,255,255,0.35);
-  box-shadow: 0 12px 0 #120424, 0 30px 60px rgba(0,0,0,0.5);
-  animation: cardin .4s cubic-bezier(.2,1.5,.4,1);
-}
-@keyframes cardin { from { opacity:0; transform: translateY(24px) scale(0.92); } }
-
-.card h1 {
-  font-size: 52px;
-  line-height: 0.95;
-  text-shadow: 0 4px 0 var(--pink), 0 8px 0 #671cb0;
-}
-#pay {
-  margin-top: 18px;
-  padding: 12px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.1);
-}
-#pay strong {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-family: 'Lilita One', cursive;
-  font-size: 46px;
-  color: var(--mint);
-  text-shadow: 0 4px 0 #14997a;
-}
-#nb {
-  display: inline-block;
-  margin-top: 6px;
-  padding: 4px 14px;
-  border-radius: 999px;
-  background: var(--sun);
-  color: #4a2300;
-  font-weight: 700;
-  transform: rotate(-3deg);
-  font-size: 13px;
-}
-
-.cabinet-footer {
-  padding: 14px 24px;
-  background: rgba(20, 6, 40, 0.85);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  color: var(--text-muted);
-}
-.cabinet-footer .hint-keys span {
-  background: rgba(255,255,255,0.14);
-  padding: 3px 8px;
-  border-radius: 6px;
-  color: #fff;
-  font-weight: 700;
-}
-
-/* Trust / Proof Cards Grid */
-.section-wrapper {
-  max-width: 1200px;
-  margin: 0 auto 70px;
-  padding: 0 24px;
-  overflow: hidden; /* Added to bound contents on mobile */
-  box-sizing: border-box;
-}
-.section-head { text-align: center; margin-bottom: 40px; }
-.section-head h3 { font-size: 38px; text-shadow: 0 3px 0 var(--pink); }
-.section-head p { color: var(--text-muted); font-size: 17px; }
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-}
-.feat-card {
-  background: var(--bg-card);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 24px;
-  padding: 28px 24px;
-  transition: transform 0.2s, background 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-.feat-card:hover {
-  transform: translateY(-5px);
-  background: var(--bg-card-hover);
-  border-color: var(--border-glow);
-}
-.feat-card::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 4px;
-  background: linear-gradient(90deg, var(--mint), var(--cyan));
-}
-.feat-icon {
-  width: 52px; height: 52px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  margin-bottom: 18px;
-}
-.feat-card h4 { font-size: 22px; margin-bottom: 10px; }
-.feat-card p { color: var(--text-muted); font-size: 15px; }
-
-/* Live Earnings & Proof Feed */
-.proof-container {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 30px;
-  align-items: flex-start;
-  width: 100%;
-  max-width: 100%;
-}
-@media (max-width: 900px) { .proof-container { grid-template-columns: 1fr; } }
-
-.live-table-card {
-  background: var(--bg-card);
-  border: 1px solid rgba(255, 79, 163, 0.25);
-  border-radius: 24px;
-  padding: 24px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  /* Fixes horizontal overflow by allowing internal scrolling */
-  max-width: 100%;
-  overflow-x: auto; 
-}
-.live-table-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 18px;
-}
-.table-payouts { 
-  width: 100%; 
-  border-collapse: collapse; 
-  min-width: 450px; /* Maintains table structure so it scrolls nicely on mobile */
-}
-.table-payouts th {
-  text-align: left;
-  padding: 10px 12px;
-  color: var(--text-muted);
-  font-size: 13px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  text-transform: uppercase;
-}
-.table-payouts td {
-  padding: 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  font-size: 14px;
-}
-.user-cell { display: flex; align-items: center; gap: 10px; font-weight: 600; }
-.user-avatar-mini {
-  width: 28px; height: 28px;
-  background: linear-gradient(135deg, #7a2be2, var(--pink));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-}
-.amount-cell { color: var(--mint); font-family: 'Lilita One'; font-size: 17px; }
-.badge-verified {
-  background: rgba(61, 255, 176, 0.15);
-  color: var(--mint);
-  border: 1px solid rgba(61, 255, 176, 0.4);
-  padding: 3px 8px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-/* Security Guarantee Box */
-.security-card {
-  background: linear-gradient(160deg, rgba(46, 17, 85, 0.85) 0%, rgba(20, 6, 40, 0.95) 100%);
-  border: 2px solid rgba(61, 255, 176, 0.4);
-  border-radius: 24px;
-  padding: 30px 24px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  max-width: 100%; /* Ensure it bounds to the device width */
-  box-sizing: border-box;
-}
-.security-list { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 14px; }
-.security-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; }
-.sec-check { color: var(--mint); font-size: 18px; line-height: 1; }
-
-/* How It Works Steps */
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-.step-item {
-  background: var(--bg-card);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 26px 20px;
-  border-radius: 20px;
-  position: relative;
-}
-.step-num {
-  position: absolute;
-  top: 16px; right: 20px;
-  font-family: 'Lilita One';
-  font-size: 40px;
-  color: rgba(255,255,255,0.06);
-}
-
-/* FAQ */
-.faq-box {
-  background: var(--bg-card);
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 14px;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-.faq-q { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-.faq-a { color: var(--text-muted); font-size: 14px; }
-
-/* Footer */
-footer {
-  border-top: 1px solid rgba(255,255,255,0.1);
-  background: #0d0319;
-  padding: 40px 24px;
-  text-align: center;
-  font-size: 13px;
-  color: var(--text-muted);
-}
-.footer-disclaimer { max-width: 780px; margin: 16px auto 0; font-size: 12px; opacity: 0.7; }
-
-/* Dynamic Floating Toast Notifications */
-#toast-container {
-  position: fixed;
-  bottom: 24px;
-  left: 24px;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  pointer-events: none;
-}
-.payout-toast {
-  background: rgba(30, 9, 60, 0.95);
-  border: 2px solid var(--mint);
-  backdrop-filter: blur(12px);
-  padding: 12px 18px;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 15px var(--mint-glow);
-  transform: translateY(30px);
-  opacity: 0;
-  animation: toastIn 0.4s ease forwards;
-  pointer-events: auto;
-  max-width: 320px;
-}
-@keyframes toastIn {
-  to { transform: translateY(0); opacity: 1; }
-}
-.toast-avatar {
-  width: 36px; height: 36px;
-  background: linear-gradient(135deg, var(--pink), var(--cyan));
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  color: #fff;
-}
-.toast-info { font-size: 13px; line-height: 1.3; }
-.toast-info strong { color: #fff; display: block; font-weight: 600; }
-.toast-info span { color: var(--mint); font-weight: 700; }
-
-
-/* Quick Start Guide content inside the withdrawal modal */
-.guide-list {
-  list-style: none;
-  text-align: left;
-  margin: 20px 0;
-  display: grid;
-  gap: 12px;
-  padding: 0;
-}
-.guide-list li {
-  padding: 12px 14px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.045);
-  border-radius: 12px;
-}
-.guide-list .guide-heading {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-}
-.guide-list .guide-check {
-  color: var(--mint);
-  font-weight: 700;
-  flex: 0 0 auto;
-}
-.guide-list .guide-subheading {
-  margin: 5px 0 0 25px;
-  color: var(--text-muted);
-  font-size: 12px;
-  line-height: 1.45;
-}
-.guide-note {
-  color: var(--text-muted);
-  font-size: 12px;
-  margin: 10px 0 16px;
-}
-
-/* Withdrawal Modal */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 3, 22, 0.82);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.modal-box {
-  background: linear-gradient(180deg, #2e0e5a 0%, #170530 100%);
-  border: 3px solid rgba(61, 255, 176, 0.5);
-  border-radius: 30px;
-  max-width: 440px;
-  width: 100%;
-  max-height: calc(100vh - 40px);
-  overflow-y: auto;
-  padding: 30px 26px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-  position: relative;
-  text-align: center;
-  animation: cardin 0.35s cubic-bezier(0.2, 1.4, 0.4, 1);
-}
-.modal-close {
-  position: absolute;
-  top: 18px; right: 20px;
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-}
-.modal-input {
-  width: 100%;
-  padding: 14px 18px;
-  border-radius: 14px;
-  border: 2px solid rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.3);
-  color: #fff;
-  font-family: 'Fredoka', sans-serif;
-  font-size: 16px;
-  margin: 14px 0 18px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-.modal-input:focus { border-color: var(--mint); }
-.withdraw-methods {
-  display: flex; gap: 8px; margin-bottom: 20px;
-}
-.w-method {
-  flex: 1;
-  padding: 10px 8px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.06);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.w-method.active {
-  border-color: var(--mint);
-  background: rgba(61,255,176,0.15);
-  color: var(--mint);
-}
-
-/* --- MOBILE OPTIMIZATION & FULLSCREEN ADDITIONS --- */
-@media (max-width: 768px) {
-  .cabinet-header, .cabinet-footer { display: none !important; }
-  .arcade-cabinet { border: none; border-radius: 0; box-shadow: none; }
-  .game-stage-wrapper { padding: 0; margin: 0; max-width: 100%; }
-  #game-container { height: 100vh; border-radius: 0; }
-  
-  /* Additional pad tweaks for mobile viewing */
-  .section-wrapper { padding: 0 16px; }
-  .live-table-card { padding: 16px; }
-  
-  .nav-actions .btn-primary { display: none; }
-  .card h1 { font-size: 42px; }
-}
-
-/* Fullscreen DOM Hooks */
-#game-container:fullscreen { width: 100vw !important; height: 100vh !important; background: #120524; }
-#game-container:-webkit-full-screen { width: 100vw !important; height: 100vh !important; background: #120524; }
+footer{background:#fff;border-top:1px solid var(--line);padding:28px 0 40px;font-size:.78rem;color:var(--muted)}
+footer p+p{margin-top:10px}
+footer nav{margin-top:14px;display:flex;gap:16px;flex-wrap:wrap}
 </style>
 </head>
-
 <body>
 
-<!-- LIVE R$ PAYOUT TICKER -->
-<div class="live-ticker-bar">
-  <div class="ticker-tag">
-    <div class="pulse-dot"></div> Live Activity
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Reward<span>Deals</span></div>
+    <small>Must be 18+ to participate</small>
   </div>
-  <div class="ticker-track-container">
-    <div class="ticker-track" id="ticker-content">
-      <!-- Populated by JavaScript -->
-      ⚡ <strong>Valkyrie_X9</strong> just cashed out <strong>+240 R$</strong> via Group Funds &nbsp;•&nbsp; 
-      ⚡ <strong>BloxGamer2024</strong> claimed <strong>+650 R$</strong> &nbsp;•&nbsp; 
-      ⚡ <strong>iiOmg_Jessie</strong> earned <strong>+120 R$</strong> &nbsp;•&nbsp; 
-      ⚡ <strong>KreekFan_99</strong> claimed <strong>+800 R$</strong> &nbsp;•&nbsp; 
-      ⚡ <strong>ShadowNinja</strong> cashed out <strong>+350 R$</strong> &nbsp;•&nbsp; 
-      ⚡ <strong>CyberQueen</strong> earned <strong>+500 R$</strong>
+</header>
+
+<main>
+<!-- HERO + QUIZ -->
+<div class="hero">
+  <div class="wrap">
+    <div class="reward-card" aria-hidden="true">
+      <div class="row">
+        <svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h8l7 28h31l6-20H15"/><path d="M24 18l2 20M33 18l1 20M42 18l-1 20M17 28h37"/><circle cx="24" cy="49" r="4"/><circle cx="46" cy="49" r="4"/></svg>
+        <div class="amt"><sup>$</sup>500</div>
+      </div>
+      <div class="name">TARGET</div>
+      <div class="disc">Offer not sponsored/endorsed by this brand.</div>
+    </div>
+
+    <h1>Get $500 towards Target</h1>
+    <p class="lede">Answer 3 quick questions to see if you qualify, then start earning with partner Deals.</p>
+
+    <div class="quiz" id="quiz">
+      <div class="progress" id="progress" aria-hidden="true"><i class="on"></i><i></i><i></i><span id="qcount">Question 1 of 3</span></div>
+
+      <div class="step" id="s1">
+        <p class="q">Do you shop at Target?</p>
+        <div class="opts">
+          <button class="opt" data-next="s2"><svg viewBox="0 0 24 24"><path d="M7 11v9H3v-9zM7 11l4-8a2 2 0 0 1 2 2v4h6a2 2 0 0 1 2 2l-1 7a2 2 0 0 1-2 2H7"/></svg><b>Yes</b></button>
+          <button class="opt" data-next="s2"><svg viewBox="0 0 24 24"><path d="M7 13V4H3v9zM7 13l4 8a2 2 0 0 0 2-2v-4h6a2 2 0 0 0 2-2l-1-7a2 2 0 0 0-2-2H7"/></svg><b>No</b></button>
+        </div>
+      </div>
+
+      <div class="step" id="s2" hidden>
+        <p class="q">Are you 18 years or older?</p>
+        <div class="opts">
+          <button class="opt" data-next="s3"><svg viewBox="0 0 24 24"><path d="M7 11v9H3v-9zM7 11l4-8a2 2 0 0 1 2 2v4h6a2 2 0 0 1 2 2l-1 7a2 2 0 0 1-2 2H7"/></svg><b>Yes</b></button>
+          <button class="opt" data-next="under18"><svg viewBox="0 0 24 24"><path d="M7 13V4H3v9zM7 13l4 8a2 2 0 0 0 2-2v-4h6a2 2 0 0 0 2-2l-1-7a2 2 0 0 0-2-2H7"/></svg><b>No</b></button>
+        </div>
+      </div>
+
+      <div class="step" id="s3" hidden>
+        <p class="q">Are you ready to try partner Deals?</p>
+        <div class="opts">
+          <button class="opt" data-next="email"><svg viewBox="0 0 24 24"><path d="M7 11v9H3v-9zM7 11l4-8a2 2 0 0 1 2 2v4h6a2 2 0 0 1 2 2l-1 7a2 2 0 0 1-2 2H7"/></svg><b>Yes, let's go</b></button>
+          <button class="opt" data-next="email"><svg viewBox="0 0 24 24"><path d="M7 13V4H3v9zM7 13l4 8a2 2 0 0 0 2-2v-4h6a2 2 0 0 0 2-2l-1-7a2 2 0 0 0-2-2H7"/></svg><b>Tell me more first</b></button>
+        </div>
+      </div>
+
+      <form class="step email-form" id="email" hidden novalidate>
+        <label for="emailInput">Enter your email to continue</label>
+        <p class="hint">We'll use it to set up your account and send your reward details.</p>
+        <input class="field" id="emailInput" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="emailErr">
+        <p class="err" id="emailErr" role="alert"></p>
+        <button class="btn" type="submit">Continue</button>
+        <p class="consent">By continuing you confirm you are 18+ and agree to the <a href="#terms">Terms</a> and <a href="#privacy">Privacy Policy</a>.</p>
+      </form>
+
+      <div class="step under18" id="under18" hidden>
+        <p class="q">Sorry, this program is for adults only.</p>
+        <p>You must be 18 or older to take part. Thanks for stopping by.</p>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- NAVIGATION -->
-<nav>
-  <a href="#" class="brand">
-    <div class="brand-icon">
-      <svg viewBox="0 0 100 100" width="28" height="28" style="fill:#3dffb0">
-        <path d="M50 0L100 50L50 100L0 50Z" />
-        <path d="M50 35L65 50L50 65L35 50Z" fill="#140636"/>
-      </svg>
-    </div>
-    <h2 class="disp">R$ <span>RUSH</span></h2>
-  </a>
-
-  <div class="nav-actions">
-    <div class="wallet-badge">
-      <svg viewBox="0 0 100 100" width="20" height="20" style="fill:#3dffb0"><path d="M50 0L100 50L50 100L0 50Z" /><path d="M50 35L65 50L50 65L35 50Z" fill="#2a0a4a"/></svg>
-      <span>Balance:</span>
-      <span class="wallet-val" id="nav-balance">0.00</span>
-    </div>
-    <button class="btn-primary" onclick="openWithdrawModal()">Withdraw</button>
-  </div>
-</nav>
-
-<!-- HERO SECTION -->
-<section class="hero">
-  <div class="trust-pill-group">
-    <div class="trust-badge safe">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-      Instant Group Payouts
-    </div>
-    <div class="trust-badge">
-      🔒 100% Safe — Never Password Required
-    </div>
-    <div class="trust-badge">
-      ⚡ Over 14.8M R$ Distributed
-    </div>
-  </div>
-
-  <h1 class="disp">PLAY THE RUNNER.<br><span>EARN REAL R$.</span></h1>
-  <p class="hero-sub">Dodge obstacles at supersonic speeds, collect pure R$ crystals, and cash out directly to your account within minutes.</p>
-</section>
-
-<!-- THE ARCADE ARENA (EMBEDDED GAME) -->
-<section class="game-stage-wrapper">
-  <div class="arcade-cabinet">
-    <div class="cabinet-header">
-      <div class="cabinet-lights">
-        <div class="cab-light cab-red"></div>
-        <div class="cab-light cab-yellow"></div>
-        <div class="cab-light cab-green"></div>
-      </div>
-      <div class="cab-title disp">ARCADE ARENA • LIVE GAME SYNC</div>
-      <div style="font-size: 13px; color: var(--mint); font-weight: 700;">● SERVER CONNECTED</div>
-    </div>
-
-    <!-- Canvas Game Container -->
-    <div id="game-container">
-      <canvas id="c"></canvas>
-      
-      <!-- HUD Overlay -->
-      <div id="hud">
-        <div class="pill disp" id="sp">
-          <span style="display:flex;align-items:center;gap:6px;">
-            <svg viewBox="0 0 100 100" width="22" height="22" style="fill:#3dffb0;margin-top:-2px"><path d="M50 0L100 50L50 100L0 50Z" /><path d="M50 35L65 50L50 65L35 50Z" fill="#2a0a4a"/></svg>
-            <b id="score" style="font-weight:400">0.00</b>
-          </span>
+<!-- DEALS -->
+<section class="block" id="how">
+  <div class="wrap">
+    <h2>How fast can I get my Reward?</h2>
+    <p>Discover our partner Deals such as mobile games and apps, free trials and many more! Complete the required number of Deals to earn your Reward.</p>
+    <ul class="deals-list">
+      <li>
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+        <div>
+          <strong>Complete 4-5 deals</strong>
+          <span>More deals, bigger reward</span>
         </div>
-        <div class="pill sm">
-          <svg viewBox="0 0 100 100" width="16" height="16" style="fill:#3dffb0"><path d="M50 0L100 50L50 100L0 50Z" /><path d="M50 35L65 50L50 65L35 50Z" fill="#2a0a4a"/></svg>
-          Best <b id="best">0.00</b>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+        <div>
+          <strong>Enter a valid email</strong>
+          <span>For instant code delivery</span>
         </div>
-        <button id="mute" aria-label="Toggle sound">🔊</button>
-      </div>
-
-      <div id="flash"></div>
-
-      <!-- In-Game Menu / Game Over Screen -->
-      <div id="screen">
-        <div class="card">
-          <h1 class="disp" id="ttl">R$ Rush</h1>
-          <p id="sub" style="margin: 18px 0 0; font-size: 17px; font-weight: 500;">Swipe or use A / D to steer. Grab every R$ gem.</p>
-          
-          <div id="pay" hidden>
-            <span style="display:block; font-size:14px; opacity:0.9;">Run Earnings</span>
-            <strong>
-              <svg viewBox="0 0 100 100" width="38" height="38" style="fill:#3dffb0"><path d="M50 0L100 50L50 100L0 50Z" /><path d="M50 35L65 50L50 65L35 50Z" fill="#2a0a4a"/></svg>
-              <em id="fin" style="font-style:normal;">0.00</em>
-            </strong>
-            <div id="nb" hidden>New Best Score!</div>
-          </div>
-
-          <div style="display:flex; gap:12px; margin-top:20px; justify-content: center; width: 100%;">
-            <button id="play" class="btn-primary" style="flex:1;">Play</button>
-            <button id="withdraw" class="btn-secondary" style="flex:1;" hidden>Cash Out</button>
-          </div>
-          <small id="hint" style="display:block; margin-top:14px; font-size:13px; opacity:0.8;">Swipe on mobile or press [A] [D] / Arrow keys</small>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+        <div>
+          <strong>Must be 18 years or older</strong>
+          <span>Required to participate</span>
         </div>
-      </div>
-    </div>
-
-    <!-- Arcade Cabinet Footer Controls & Tips -->
-    <div class="cabinet-footer">
-      <div class="hint-keys">Controls: <span>A</span> <span>D</span> or <span>←</span> <span>→</span> | Touch: Swipe left & right</div>
-      <div>Session ID: <strong style="color:#fff;">#RBX-9941</strong></div>
-    </div>
+      </li>
+    </ul>
   </div>
 </section>
 
-<!-- LIVE PAYOUTS & PROOF FEED -->
-<section class="section-wrapper">
-  <div class="section-head">
-    <h3 class="disp">TRANSPARENT <span>LIVE PAYOUTS</span></h3>
-    <p>Real-time ledger of player earnings processed automatically through verified Roblox Group distributions.</p>
-  </div>
-
-  <div class="proof-container">
-    <!-- Live Table -->
-    <div class="live-table-card">
-      <div class="live-table-header">
-        <h4 class="disp" style="font-size: 22px;">Recent Completed Withdrawals</h4>
-        <span class="badge-verified">● Live Sync</span>
-      </div>
-
-      <table class="table-payouts">
-        <thead>
-          <tr>
-            <th>Player</th>
-            <th>Payout Method</th>
-            <th>Amount</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="payout-tbody">
-          <!-- Populated by JS dynamic ticker -->
+<!-- REWARD LEVELS -->
+<section class="block" id="rewards">
+  <div class="wrap">
+    <h2>Check out ways to claim other Rewards!</h2>
+    <p>Complete 25 Deals to claim a $1000 Reward or complete fewer to claim a lesser value Reward. For example: to claim a $5 Reward, complete one Deal from level 1 and one Deal from level 2 for a total of 2 Deals. See below for total # of Deals required to claim Rewards from each level.</p>
+    <div class="table-shell">
+      <table>
+        <thead><tr><th>Level #</th><th class="rv">Reward value</th><th>Total Deals required to claim reward</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td class="rv">--</td><td>--</td></tr>
+          <tr><td>2</td><td class="rv">$5<sup>3</sup></td><td>2</td></tr>
+          <tr><td>3</td><td class="rv">$100<sup>4</sup></td><td>5</td></tr>
+          <tr><td>4</td><td class="rv">$250<sup>5</sup></td><td>10</td></tr>
+          <tr class="hl"><td>5</td><td class="rv">$500</td><td>15</td></tr>
+          <tr><td>5</td><td class="rv">$750</td><td>20</td></tr>
+          <tr><td>5</td><td class="rv">$1000<sup>6</sup></td><td>25</td></tr>
         </tbody>
       </table>
     </div>
-
-    <!-- Security & Trust Matrix -->
-    <div class="security-card">
-      <h4 class="disp" style="font-size: 26px; color: var(--mint);">100% ACCOUNT SAFETY</h4>
-      <p style="font-size: 14px; color: var(--text-muted); margin-top: 6px;">How we guarantee zero risk to your Roblox profile:</p>
-
-      <ul class="security-list">
-        <li>
-          <span class="sec-check">✔</span>
-          <div>
-            <strong style="color:#fff;">No Passwords or Cookies Ever</strong>
-            <p style="color:var(--text-muted); font-size: 13px;">We only require your public Roblox username. We will never ask for your password, email, or credentials.</p>
-          </div>
-        </li>
-        <li>
-          <span class="sec-check">✔</span>
-          <div>
-            <strong style="color:#fff;">Official Group Fund API</strong>
-            <p style="color:var(--text-muted); font-size: 13px;">Funds are disbursed directly into your account using standard developer group payouts.</p>
-          </div>
-        </li>
-        <li>
-          <span class="sec-check">✔</span>
-          <div>
-            <strong style="color:#fff;">Instant Transfer Speeds</strong>
-            <p style="color:var(--text-muted); font-size: 13px;">Automated bots deliver payouts within 30 to 90 seconds once requested.</p>
-          </div>
-        </li>
-      </ul>
-
-      <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: space-between;">
-        <span style="font-size: 13px; color: var(--text-muted);">Trust Score</span>
-        <span style="color: var(--sun); font-weight: 700;">★ 4.9 / 5.0 (2,490+ Reviews)</span>
-      </div>
-    </div>
+    <p class="fine">The $500 reward requires 15 completed Deals. Superscript numbers refer to the program terms. Deal availability and completion time vary.</p>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="section-wrapper">
-  <div class="section-head">
-    <h3 class="disp">HOW IT <span>WORKS</span></h3>
-    <p>Three straightforward steps between you and your R$ balance.</p>
-  </div>
-
-  <div class="steps-grid">
-    <div class="step-item">
-      <div class="step-num">01</div>
-      <div class="feat-icon">🕹️</div>
-      <h4>Play the Skill Runner</h4>
-      <p>Launch the game right in your browser. Dodge tricky obstacles and grab green R$ crystals to raise your bank.</p>
-    </div>
-    <div class="step-item">
-      <div class="step-num">02</div>
-      <div class="feat-icon">💎</div>
-      <h4>Stack Your Real Balance</h4>
-      <p>Every coin collected translates into balance added directly to your session wallet in real-time.</p>
-    </div>
-    <div class="step-item">
-      <div class="step-num">03</div>
-      <div class="feat-icon">🚀</div>
-      <h4>Instant Payout</h4>
-      <p>Hit "Withdraw", and our payout bot delivers it directly.</p>
-    </div>
+<!-- FAQ -->
+<section class="block" id="faq">
+  <div class="wrap">
+    <h2>We’ve got Deals you will love!</h2>
+    <details><summary>How many Deals do I need to complete?</summary><p>It depends on the reward level. The $500 reward requires 15 completed Deals. See the reward levels table above.</p></details>
+    <details><summary>How long do Deals take?</summary><p>Usually 15-30 minutes. You need to complete the required number of deals to verify your status.</p></details>
+    <details><summary>What kinds of Deals are included?</summary><p>Mobile games and apps, free trials, surveys and more from our partners.</p></details>
+    <details><summary>Do I have to pay anything?</summary><p>You don't pay to join.</p></details>
   </div>
 </section>
 
-<!-- FAQ SECTION -->
-<section class="section-wrapper" style="max-width: 820px;">
-  <div class="section-head">
-    <h3 class="disp">FREQUENTLY ASKED <span>QUESTIONS</span></h3>
-    <p>Everything you need to know about safety and withdrawals.</p>
-  </div>
-
-  <div class="faq-box">
-    <div class="faq-q">Do you need my Roblox password?</div>
-    <div class="faq-a">No, absolutely not. Never give your password to anyone.</div>
-  </div>
-
-  <div class="faq-box">
-    <div class="faq-q">How fast are the payouts sent?</div>
-    <div class="faq-a">Withdrawals are automated. Most transactions reflect in your walet transaction ledger within 1 to 2 minutes after claiming.</div>
-  </div>
-
-  <div class="faq-box">
-    <div class="faq-q">Is there a minimum withdrawal amount?</div>
-    <div class="faq-a">You can request a withdrawal once you accumulate at least 10.00 R$ during your runner sessions.</div>
+<!-- BOTTOM CTA -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Ready to get started?</h2>
+    <p style="color:var(--muted)">Check your eligibility and see your first Deals.</p>
+    <a class="btn" href="#quiz" id="quickStart">Get a Quick Start</a>
   </div>
 </section>
+</main>
 
-<!-- FOOTER -->
 <footer>
-  <div class="brand" style="justify-content: center; margin-bottom: 12px;">
-    <h2 class="disp">R$ <span>RUSH</span></h2>
+  <div class="wrap">
+    <p><strong>Disclosure:</strong> This offer is not sponsored or endorsed by Target. Target is a trademark of its respective owner. Rewards are earned by completing the required number of partner Deals. Participants must be 18 or older. Reward availability, Deal requirements and eligibility are subject to the program terms.</p>
+    <p>Some Deals may require a purchase, subscription or personal information. Review each Deal before you start.</p>
+    <nav><a href="#terms" id="terms">Terms</a><a href="#privacy" id="privacy">Privacy Policy</a><a href="mailto:support@yourdomain.com">Contact</a></nav>
+    <p>&copy; <span id="yr"></span> RewardDeals. All rights reserved.</p>
   </div>
-  <p>© 2026 R$ Rush Arcade. All rights reserved.</p>
-  <p class="footer-disclaimer">
-    Robux Rush is an independent skill arcade reward platform. Roblox is a registered trademark of Roblox Corporation. This platform is not sponsored, endorsed, or affiliated with Roblox Corporation.
-  </p>
 </footer>
 
-<!-- FLOATING DYNAMIC EARNINGS TOAST FEED -->
-<div id="toast-container"></div>
-
-<!-- WITHDRAWAL MODAL / QUICK START GUIDE -->
-<div class="modal-overlay" id="withdraw-modal" role="dialog" aria-modal="true" aria-labelledby="withdraw-guide-title">
-  <div class="modal-box">
-    <button class="modal-close" type="button" aria-label="Close withdrawal guide" onclick="closeWithdrawModal()">✕</button>
-
-    <div style="width: 56px; height: 56px; background: rgba(61,255,176,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;">
-      <svg viewBox="0 0 100 100" width="32" height="32" style="fill:#3dffb0"><path d="M50 0L100 50L50 100L0 50Z" /><path d="M50 35L65 50L50 65L35 50Z" fill="#140636"/></svg>
-    </div>
-
-    <h3 class="disp" id="withdraw-guide-title" style="font-size: 28px;">Quick Start Guide</h3>
-    <p style="color: var(--text-muted); font-size: 14px; margin-top: 6px;">Review the requirements before continuing.</p>
-
-    <ul class="guide-list">
-      <li>
-        <div class="guide-heading"><span class="guide-check">•</span><span>Enter a valid username</span></div>
-        <p class="guide-subheading">Your Roblox username is required for delivery.</p>
-      </li>
-      <li>
-        <div class="guide-heading"><span class="guide-check">•</span><span>Complete 2–3 deals</span></div>
-        <p class="guide-subheading">Quick &amp; easy — complete the required deals first.</p>
-      </li>
-      <li>
-        <div class="guide-heading"><span class="guide-check">•</span><span>Real people only</span></div>
-        <p class="guide-subheading">No bots. This requirement applies to all participants.</p>
-      </li>
-    </ul>
-
-    <label for="rbx-user" style="display:block; text-align:left; font-size:13px; color:var(--text-muted);">Roblox username</label>
-    <input type="text" id="rbx-user" class="modal-input" placeholder="Enter your Roblox username" autocomplete="off">
-
-    <p class="guide-note">We do not ask your password, Never enter your Roblox password or account cookies.</p>
-    <button class="btn-primary" style="width: 100%;" type="button" onclick="window.location.href='https://trkoffer.net/cl/i/d2347o'">Withdraw</button>
-  </div>
-</div>
-
-<!-- SCRIPTS: THREE.JS + GAME ENGINE + DYNAMIC NOTIFICATIONS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
 <script>
-/* ==========================================================
-   1. GLOBAL WALLET & DYNAMIC NOTIFICATION SYSTEM
-   ========================================================== */
-let globalBalance = 0.00;
-const fakeUsernames = [
-  "ShadowNinja_99", "BloxQueen2024", "KreekFanatic", "Valkyrie_Pro",
-  "xX_GamerGuy_Xx", "iiOmg_Jessie", "NoobSlayer9000", "CyberDragon",
-  "FrostBite_YT", "HyperVortex", "BaconHairLord", "Builderman_Official",
-  "RoyalKnight_RBX", "PixelMaster77", "NeonStrike", "StarGazer_00"
-];
+(function(){
+  // ===== CONFIG =====
+  var OFFER_URL = 'https://appcomplete.org/cl/i/34jvrm';
+  var PASS_EMAIL_PARAM = 'email'; // set to '' to NOT append the email to the URL
+  // ==================
 
-function updateWalletDisplay(newScore) {
-  globalBalance = Math.max(globalBalance, newScore);
-  
-  const navBalanceElem = document.getElementById('nav-balance');
-  if (navBalanceElem) {
-    navBalanceElem.textContent = globalBalance.toFixed(2);
-  }
-  
-  const modalAvailableElem = document.getElementById('modal-available');
-  if (modalAvailableElem) {
-    modalAvailableElem.textContent = globalBalance.toFixed(2) + ' R$';
-  }
-}
+  document.getElementById('yr').textContent = new Date().getFullYear();
 
-/* Dynamic Live Table Generation */
-const payoutTbody = document.getElementById('payout-tbody');
-function addPayoutRow(user, amount, method = "Group Funds") {
-  const tr = document.createElement('tr');
-  tr.innerHTML = `
-    <td>
-      <div class="user-cell">
-        <div class="user-avatar-mini">${user.charAt(0).toUpperCase()}</div>
-        <span>${user}</span>
-      </div>
-    </td>
-    <td>${method}</td>
-    <td class="amount-cell">+${amount} R$</td>
-    <td><span class="badge-verified">✓ Sent</span></td>
-  `;
-  payoutTbody.prepend(tr);
-  if (payoutTbody.children.length > 5) {
-    payoutTbody.removeChild(payoutTbody.lastChild);
-  }
-}
+  var steps = ['s1','s2','s3'];
+  var bars = document.querySelectorAll('#progress i');
+  var qcount = document.getElementById('qcount');
+  var progress = document.getElementById('progress');
 
-// Initial populate of table
-for(let i=0; i<5; i++) {
-  const randU = fakeUsernames[Math.floor(Math.random() * fakeUsernames.length)];
-  const randA = (Math.random() * 450 + 50).toFixed(0);
-  addPayoutRow(randU, randA);
-}
-
-/* Dynamic Floating Toast Notifications (Popups) */
-const toastContainer = document.getElementById('toast-container');
-
-function triggerRandomPayoutPopup() {
-  const randUser = fakeUsernames[Math.floor(Math.random() * fakeUsernames.length)];
-  const randAmount = (Math.floor(Math.random() * 38) * 10 + 40); // 40 - 420 R$
-  const time = Math.floor(Math.random() * 4) + 1;
-
-  const toast = document.createElement('div');
-  toast.className = 'payout-toast';
-  toast.innerHTML = `
-    <div class="toast-avatar">${randUser.charAt(0).toUpperCase()}</div>
-    <div class="toast-info">
-      <strong>${randUser}</strong>
-      <span>+${randAmount} R$</span> cashed out (${time}s ago)
-    </div>
-  `;
-
-  toastContainer.appendChild(toast);
-
-  // Add also to the table
-  addPayoutRow(randUser, randAmount);
-
-  // Remove toast after 4.5 seconds
-  setTimeout(() => {
-    toast.style.transition = 'all 0.4s ease';
-    toast.style.opacity = '0';
-    toast.style.transform = 'translateY(20px)';
-    setTimeout(() => toast.remove(), 400);
-  }, 4500);
-}
-
-// Trigger a new fake pop-up notification every 5.5 to 8.5 seconds
-setInterval(triggerRandomPayoutPopup, 6500);
-
-/* Withdrawal Modal Handling */
-function openWithdrawModal() {
-  try {
-    if (document.fullscreenElement || document.webkitFullscreenElement) {
-      if (document.exitFullscreen) {
-        document.exitFullscreen().catch(()=>{});
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      }
+  function show(id){
+    document.querySelectorAll('.step').forEach(function(s){ s.hidden = (s.id !== id); });
+    var idx = steps.indexOf(id);
+    if(idx === -1){
+      bars.forEach(function(b){ b.classList.add('on'); });
+      qcount.textContent = id === 'email' ? 'Almost done' : '';
+      if(id === 'under18') progress.style.display = 'none';
+    } else {
+      bars.forEach(function(b,i){ b.classList.toggle('on', i <= idx); });
+      qcount.textContent = 'Question ' + (idx+1) + ' of 3';
     }
-  } catch(e) {}
-  document.getElementById('withdraw-modal').style.display = 'flex';
-}
-function closeWithdrawModal() {
-  document.getElementById('withdraw-modal').style.display = 'none';
-}
-function processWithdraw() {
-  const user = document.getElementById('rbx-user').value.trim();
-  if(!user) {
-    alert("Please enter a valid Roblox username!");
-    return;
+    if(id === 'email') setTimeout(function(){ document.getElementById('emailInput').focus(); }, 50);
   }
-  if(globalBalance < 10.00) {
-    alert(`Current balance (${globalBalance.toFixed(2)} R$) is below the minimum threshold of 10.00 R$. Play more rounds to hit the mark!`);
-    return;
-  }
-  alert(`Success! Payout request of ${globalBalance.toFixed(2)} R$ submitted for user '${user}'. Estimated arrival: 1-2 minutes.`);
-  closeWithdrawModal();
-}
 
-/* ==========================================================
-   2. ROBUX RUSH THREE.JS GAME ENGINE (INTEGRATED & SYNCED)
-   ========================================================== */
-(()=>{
-const $ = i => document.getElementById(i);
-const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
-const container = $('game-container');
-const canvas = $('c');
-
-let renderer;
-try {
-  renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-} catch(e) {
-  $('sub').textContent = 'This game requires WebGL. Please try another browser.';
-  $('play').hidden = true;
-  return;
-}
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1200);
-scene.fog = new THREE.Fog(0xff7ab8, 30, 150);
-
-const cv = (w, h, f) => {
-  const c = document.createElement('canvas');
-  c.width = w; c.height = h;
-  f(c.getContext('2d'), w, h);
-  return c;
-};
-const tex = (c, rx = 1, ry = 1) => {
-  const t = new THREE.CanvasTexture(c);
-  t.wrapS = t.wrapT = THREE.RepeatWrapping;
-  t.repeat.set(rx, ry);
-  t.anisotropy = 4;
-  return t;
-};
-const M = (c, e = 0, o = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, emissive: e, roughness: 0.35, metalness: 0.15 }, o));
-const BASIC = c => new THREE.MeshBasicMaterial({ color: c });
-
-/* ---------- Sky + Sun ---------- */
-const skyT = new THREE.CanvasTexture(cv(4, 512, (g, w, h) => {
-  const r = g.createLinearGradient(0, 0, 0, h);
-  [[0, '#140636'], [0.28, '#4a1b9a'], [0.42, '#d23fa0'], [0.49, '#ff8a6b'], [0.5, '#ffd08a'], [0.51, '#ff7ab8'], [1, '#ff7ab8']].forEach(([o, c]) => r.addColorStop(o, c));
-  g.fillStyle = r;
-  g.fillRect(0, 0, w, h);
-}));
-scene.add(new THREE.Mesh(new THREE.SphereGeometry(500, 16, 16), new THREE.MeshBasicMaterial({ map: skyT, side: THREE.BackSide, fog: false, depthWrite: false })));
-
-const sunT = new THREE.CanvasTexture(cv(256, 256, g => {
-  const r = g.createLinearGradient(0, 0, 0, 256);
-  r.addColorStop(0, '#fff6a8');
-  r.addColorStop(0.55, '#ffb04a');
-  r.addColorStop(1, '#ff3f9a');
-  g.fillStyle = r;
-  g.beginPath();
-  g.arc(128, 128, 126, 0, 7);
-  g.fill();
-  g.globalCompositeOperation = 'destination-out';
-  for (let i = 0; i < 7; i++) g.fillRect(0, 140 + i * 16, 256, 2 + i * 1.6);
-}));
-const sun = new THREE.Mesh(new THREE.PlaneGeometry(130, 130), new THREE.MeshBasicMaterial({ map: sunT, transparent: true, fog: false }));
-sun.position.set(0, 34, -380);
-scene.add(sun);
-
-scene.add(new THREE.HemisphereLight(0xffc2e8, 0x5a2d9c, 1.05));
-const dl = new THREE.DirectionalLight(0xffe0b0, 0.9);
-dl.position.set(-5, 10, 8);
-scene.add(dl);
-
-/* ---------- Track, Ground, Rails ---------- */
-const TL = 7.8, LX = [-2.6, 0, 2.6];
-const tt = tex(cv(256, 256, (g, w, h) => {
-  g.fillStyle = '#2e1670';
-  g.fillRect(0, 0, w, h);
-  g.fillStyle = 'rgba(255,255,255,.06)';
-  g.fillRect(0, 0, w, h / 2);
-  g.fillStyle = '#38e1ff';
-  [w / 3, w * 2 / 3].forEach(x => g.fillRect(x - 3, 10, 6, h * 0.5));
-  g.fillStyle = 'rgba(255,79,163,.55)';
-  g.fillRect(0, 0, w, 4);
-}), 1, 54);
-const track = new THREE.Mesh(new THREE.PlaneGeometry(TL, 420), new THREE.MeshBasicMaterial({ map: tt }));
-track.rotation.x = -Math.PI / 2;
-track.position.set(0, 0, -190);
-scene.add(track);
-
-const gt = tex(cv(128, 128, (g, w, h) => {
-  g.fillStyle = '#3a1a80';
-  g.fillRect(0, 0, w, h);
-  g.strokeStyle = 'rgba(255,79,163,.7)';
-  g.lineWidth = 3;
-  g.strokeRect(0, 0, w, h);
-}), 50, 70);
-const gnd = new THREE.Mesh(new THREE.PlaneGeometry(300, 420), new THREE.MeshBasicMaterial({ map: gt }));
-gnd.rotation.x = -Math.PI / 2;
-gnd.position.set(0, -0.06, -190);
-scene.add(gnd);
-
-[-1, 1].forEach(s => {
-  const r = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.45, 420), BASIC(0xff4fa3));
-  r.position.set(s * (TL / 2 + 0.15), 0.2, -190);
-  scene.add(r);
-  const l = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.08, 420), BASIC(0x38e1ff));
-  l.position.set(s * (TL / 2 + 0.15), 0.46, -190);
-  scene.add(l);
-});
-
-/* ---------- City Skyline ---------- */
-const winT = lit => tex(cv(128, 128, (g, w, h) => {
-  g.fillStyle = lit ? '#000' : '#6a3cc0';
-  g.fillRect(0, 0, w, h);
-  for (let i = 0; i < 4; i++) {
-    for (let j = 0; j < 4; j++) {
-      const on = (i * 31 + j * 17 + i * j) % 7 < 3;
-      g.fillStyle = lit ? (on ? ['#ffe27a', '#7af0ff', '#ff9be0'][(i + j) % 3] : '#000') : (on ? '#ffe27a' : '#3a1d7a');
-      g.fillRect(i * 32 + 8, j * 32 + 8, 16, 18);
-    }
-  }
-}));
-const wb = winT(0), wl = winT(1), bm = [0xffffff, 0xffc0f0, 0xb0e8ff].map(c => new THREE.MeshLambertMaterial({ map: wb, emissiveMap: wl, emissive: 0xffffff, color: c }));
-const SPAN = 336, bl = [];
-for (let i = 0; i < 48; i++) {
-  const w = 3 + Math.random() * 4, h = 8 + Math.random() * 34, d = 3 + Math.random() * 4, g = new THREE.BoxGeometry(w, h, d), uv = g.attributes.uv;
-  for (let k = 0; k < uv.count; k++) uv.setXY(k, uv.getX(k) * w / 4, uv.getY(k) * h / 4);
-  const m = new THREE.Mesh(g, bm[i % 3]);
-  m.position.set((i % 2 ? 1 : -1) * (8 + Math.random() * 22), h / 2 - 0.1, 20 - (i >> 1) * 14 - Math.random() * 6);
-  scene.add(m);
-  bl.push(m);
-}
-
-/* ---------- Speed Streaks ---------- */
-const sm = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.45 }), sg = new THREE.BoxGeometry(0.05, 0.05, 4), st = [];
-for (let i = 0; i < 36; i++) {
-  const m = new THREE.Mesh(sg, sm);
-  m.position.set((i % 2 ? 1 : -1) * (4.6 + Math.random() * 10), 0.3 + Math.random() * 7, -Math.random() * 130);
-  scene.add(m);
-  st.push(m);
-}
-
-/* ---------- Glow Sprite Generator ---------- */
-const glowT = new THREE.CanvasTexture(cv(64, 64, g => {
-  const r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
-  r.addColorStop(0, 'rgba(255,255,255,1)');
-  r.addColorStop(0.4, 'rgba(255,255,255,.35)');
-  r.addColorStop(1, 'rgba(255,255,255,0)');
-  g.fillStyle = r;
-  g.fillRect(0, 0, 64, 64);
-}));
-const glow = (c, s, o = 0.9) => {
-  const p = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowT, color: c, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, opacity: o }));
-  p.scale.set(s, s, 1);
-  return p;
-};
-
-/* ---------- Player Ship ---------- */
-const ship = new THREE.Group(), body = new THREE.Group(), flames = [];
-ship.add(body);
-const hull = new THREE.Mesh(new THREE.SphereGeometry(0.62, 24, 16), M(0xffffff, 0x222233, { roughness: 0.2 }));
-hull.scale.set(1, 0.55, 1.8);
-body.add(hull);
-const cano = new THREE.Mesh(new THREE.SphereGeometry(0.4, 20, 14), M(0x38e1ff, 0x1590c8, { transparent: true, opacity: 0.92, roughness: 0.1 }));
-cano.position.set(0, 0.25, -0.15);
-cano.scale.set(0.9, 0.75, 1.5);
-body.add(cano);
-const wing = new THREE.Mesh(new THREE.BoxGeometry(2.3, 0.1, 0.7), M(0xff4fa3, 0x8a1f5e));
-wing.position.set(0, -0.02, 0.45);
-body.add(wing);
-[-1, 1].forEach(s => {
-  const tip = new THREE.Mesh(new THREE.SphereGeometry(0.2, 12, 10), M(0xffe27a, 0xb88a10));
-  tip.position.set(s * 1.15, -0.02, 0.45);
-  body.add(tip);
-  const fin = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.5, 0.55), M(0xff4fa3, 0x8a1f5e));
-  fin.position.set(s * 0.5, 0.3, 0.85);
-  fin.rotation.z = -s * 0.25;
-  body.add(fin);
-  const jet = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.26, 0.4, 14), M(0x2a0a4a));
-  jet.rotation.x = Math.PI / 2;
-  jet.position.set(s * 0.35, 0, 1.1);
-  body.add(jet);
-  const fl = glow(0x38e1ff, 1.4);
-  fl.position.set(s * 0.35, 0, 1.45);
-  body.add(fl);
-  flames.push(fl);
-});
-const under = glow(0xff4fa3, 3.4, 0.7);
-under.position.y = -0.4;
-body.add(under);
-ship.scale.setScalar(1.1);
-scene.add(ship);
-
-const shadow = new THREE.Mesh(new THREE.CircleGeometry(1, 20), new THREE.MeshBasicMaterial({ color: 0, transparent: true, opacity: 0.35 }));
-shadow.rotation.x = -Math.PI / 2;
-shadow.scale.set(1.1, 1.8, 1);
-shadow.position.y = 0.04;
-scene.add(shadow);
-
-/* ---------- Obstacles & R$ Coins ---------- */
-const crT = new THREE.CanvasTexture(cv(128, 128, (g, w, h) => {
-  g.fillStyle = '#ff4d5e';
-  g.fillRect(0, 0, w, h);
-  g.fillStyle = '#c91f48';
-  [[0, 0, w, 14], [0, h - 14, w, 14], [0, 0, 14, h], [w - 14, 0, 14, h]].forEach(r => g.fillRect(...r));
-  g.strokeStyle = '#ffd23f';
-  g.lineWidth = 14;
-  g.lineCap = 'round';
-  g.beginPath();
-  g.moveTo(34, 34); g.lineTo(94, 94);
-  g.moveTo(94, 34); g.lineTo(34, 94);
-  g.stroke();
-}));
-const crG = new THREE.BoxGeometry(1.9, 1.9, 1.9), crM = M(0xffffff, 0xff2a4a, { map: crT, emissiveIntensity: 0.25, roughness: 0.4 }), edM = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5 }), edG = new THREE.EdgesGeometry(crG);
-const orbG = new THREE.IcosahedronGeometry(0.75, 1), orbM = M(0x2a0a4a, 0xff2a4a, { emissiveIntensity: 0.8 }), spkG = new THREE.ConeGeometry(0.2, 0.65, 8), spkM = M(0xff4d5e, 0xff2a4a);
-const PHI = (1 + Math.sqrt(5)) / 2, dirs = [];
-[-1, 1].forEach(a => [-1, 1].forEach(b => dirs.push([0, a, b * PHI], [a, b * PHI, 0], [b * PHI, 0, a])));
-
-function mkCrate() {
-  const g = new THREE.Group(), m = new THREE.Mesh(crG, crM);
-  m.position.y = 0.95;
-  g.add(m);
-  const e = new THREE.LineSegments(edG, edM);
-  e.position.y = 0.95;
-  g.add(e);
-  const gl = glow(0xff4d5e, 4.2, 0.4);
-  gl.position.y = 1;
-  g.add(gl);
-  g.rotation.y = (Math.random() - 0.5) * 0.4;
-  return g;
-}
-function mkOrb() {
-  const g = new THREE.Group();
-  g.add(new THREE.Mesh(orbG, orbM));
-  dirs.forEach(d => {
-    const v = new THREE.Vector3(...d).normalize(), c = new THREE.Mesh(spkG, spkM);
-    c.position.copy(v).multiplyScalar(0.95);
-    c.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), v);
-    g.add(c);
+  document.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){ show(b.dataset.next); });
   });
-  const gl = glow(0xff2a4a, 3.6, 0.45);
-  g.add(gl);
-  return g;
-}
 
-const cHex = new THREE.CylinderGeometry(0.62, 0.62, 0.16, 6), cIn = new THREE.CylinderGeometry(0.34, 0.34, 0.2, 6);
-const cM = M(0x3dffb0, 0x12c98a, { emissiveIntensity: 0.7, metalness: 0.4, roughness: 0.25 }), cD = M(0x2a0a4a);
+  var form = document.getElementById('email');
+  var input = document.getElementById('emailInput');
+  var err = document.getElementById('emailErr');
+  var re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-function mkCoin(v) {
-  const g = new THREE.Group(), a = new THREE.Mesh(cHex, cM), b = new THREE.Mesh(cIn, cD);
-  a.rotation.x = b.rotation.x = Math.PI / 2;
-  g.add(a, b);
-  g.add(glow(0x3dffb0, 2.6, 0.65));
-  g.scale.setScalar(0.85 + v * 0.1);
-  return g;
-}
-
-/* ---------- Particles ---------- */
-const pg = new THREE.BoxGeometry(0.2, 0.2, 0.2), P = [];
-let pi = 0;
-for (let i = 0; i < 220; i++) {
-  const m = new THREE.Mesh(pg, new THREE.MeshBasicMaterial({ color: 0xffffff, fog: false }));
-  m.visible = false;
-  scene.add(m);
-  P.push({ m, l: 0 });
-}
-function emit(x, y, z, c, vx, vy, vz, life, sz, g) {
-  const p = P[pi++ % 220];
-  p.m.position.set(x, y, z);
-  p.m.material.color.set(c);
-  Object.assign(p, { vx, vy, vz, l: life, ml: life, sz, g });
-  p.m.visible = true;
-}
-function burst(x, y, z, cols, n, s) {
-  for (let i = 0; i < n; i++) {
-    const a = Math.random() * 6.28, u = Math.random() * 2 - 0.6, sp = s * (0.4 + Math.random() * 0.8);
-    emit(x, y, z, cols[i % cols.length], Math.cos(a) * sp, u * sp + 2, Math.sin(a) * sp, 0.6 + Math.random() * 0.5, 1 + Math.random(), -14);
-  }
-}
-
-/* ---------- Audio Engine ---------- */
-let ac, muted = false;
-const bgm = new Audio('https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3');
-bgm.loop = true;
-bgm.volume = 0.35;
-
-function tone(f, d, type = 'sine', v = 0.12, to = 0) {
-  if (muted) return;
-  try {
-    ac = ac || new (window.AudioContext || window.webkitAudioContext)();
-    const t = ac.currentTime, o = ac.createOscillator(), g = ac.createGain();
-    o.type = type;
-    o.frequency.setValueAtTime(f, t);
-    if (to) o.frequency.exponentialRampToValueAtTime(to, t + d);
-    g.gain.setValueAtTime(v, t);
-    g.gain.exponentialRampToValueAtTime(0.001, t + d);
-    o.connect(g);
-    g.connect(ac.destination);
-    o.start();
-    o.stop(t + d);
-  } catch (e) {}
-}
-
-$('mute').onclick = e => {
-  muted = !muted;
-  e.currentTarget.textContent = muted ? '🔇' : '🔊';
-  if (muted) bgm.pause();
-  else if (state === 'play') bgm.play();
-};
-
-/* ---------- Game State Machine ---------- */
-let state = 'menu', speed = 26, vis = 0, score = 0, best = 0, lane = 1, rowT = 0, coinT = 0, shake = 0, last = 0, camY = 7, camZ = 10;
-let ob = [], cn = [];
-try { best = +localStorage.getItem('rr-best') || 0; } catch (e) {}
-const sc = $('score'), scr = $('screen');
-$('best').textContent = best.toFixed(2);
-
-function fit() {
-  const w = container.clientWidth, h = container.clientHeight;
-  renderer.setSize(w, h);
-  camera.aspect = w / h;
-  camZ = Math.max(9.5, 7.6 / camera.aspect);
-  camY = 2.4 + camZ * 0.34;
-  camera.updateProjectionMatrix();
-}
-window.addEventListener('resize', fit);
-fit();
-
-function start() {
-  if (state === 'play') return;
-
-  // Safe Request Fullscreen - Will safely fail without breaking game if blocked by Safari.
-  try {
-    const gc = document.getElementById('game-container');
-    if (gc.requestFullscreen) {
-      gc.requestFullscreen().catch(e => {}); 
-    } else if (gc.webkitRequestFullscreen) {
-      gc.webkitRequestFullscreen();
-    }
-  } catch(e) {}
-
-  if (!muted) bgm.play();
-  ob.forEach(o => scene.remove(o.m));
-  cn.forEach(c => scene.remove(c.m));
-  ob = []; cn = [];
-  state = 'play'; speed = 26; score = 0; lane = 1; rowT = 30; coinT = 1.5;
-  ship.visible = shadow.visible = true; ship.position.x = 0; sc.textContent = '0.00';
-  
-  scr.hidden = true;
-  $('play').textContent = 'Play';
-  $('withdraw').hidden = true;
-  tone(440, 0.12, 'square', 0.08, 880);
-}
-
-function crash() {
-  state = 'over';
-  ship.visible = shadow.visible = false;
-  bgm.pause();
-  bgm.currentTime = 0;
-  burst(ship.position.x, 1, 0, [0xff4d5e, 0xffd23f, 0xffffff, 0x38e1ff], 60, 9);
-  shake = RM ? 0 : 0.9;
-  const f = $('flash');
-  f.classList.remove('on');
-  void f.offsetWidth;
-  f.classList.add('on');
-  tone(220, 0.6, 'sawtooth', 0.2, 40);
-  if (navigator.vibrate) navigator.vibrate(120);
-
-  // Sync with global wallet
-  updateWalletDisplay(score);
-
-  setTimeout(() => {
-    const nb = score > best && score > 0;
-    if (nb) {
-      best = score;
-      try { localStorage.setItem('rr-best', best); } catch (e) {}
-    }
-    $('best').textContent = best.toFixed(2);
-    $('fin').textContent = score.toFixed(2);$('nb').hidden = !nb;
-    $('pay').hidden = false;
-    $('ttl').textContent = 'Session Finished!';$('sub').hidden = true;
-    $('hint').hidden = true;
-
-    $('play').textContent = 'Play Again';$('withdraw').hidden = false;
-
-    scr.hidden = false;
-    $('play').focus();
-  }, 800);
-}
-
-function move(d) {
-  if (state !== 'play') return;
-  const n = lane + d;
-  if (n < 0 || n > 2) return;
-  lane = n;
-  tone(300, 0.09, 'sine', 0.05, 700);
-}
-
-// Button Events
-$('play').onclick = start;
-$('withdraw').onclick = openWithdrawModal;
-
-/* ---------- Touch & Keyboard Inputs ---------- */
-window.addEventListener('keydown', e => {
-  const k = e.key.toLowerCase();
-  if (k === 'arrowleft' || k === 'a') move(-1);
-  else if (k === 'arrowright' || k === 'd') move(1);
-  else if ((k === 'enter' || k === ' ') && !scr.hidden) {
+  form.addEventListener('submit', function(e){
     e.preventDefault();
-    start();
-  }
-});
-
-let px0 = 0;
-canvas.addEventListener('pointerdown', e => { px0 = e.clientX; });
-canvas.addEventListener('pointerup', e => {
-  if (state !== 'play') return;
-  const dx = e.clientX - px0;
-  const rect = canvas.getBoundingClientRect();
-  const relX = e.clientX - rect.left;
-  if (Math.abs(dx) > 25) move(dx < 0 ? -1 : 1);
-  else move(relX < rect.width / 2 ? -1 : 1);
-});
-
-/* ---------- Spawning Systems ---------- */
-const SZ = -140;
-function addOb(l) {
-  const orb = Math.random() < 0.4, m = orb ? mkOrb() : mkCrate();
-  m.position.set(LX[l], orb ? 1.1 : 0, SZ);
-  scene.add(m);
-  ob.push({ m, lane: l, orb, ph: Math.random() * 6 });
-}
-function row() {
-  const e = Math.random() * 3 | 0;
-  for (let i = 0; i < 3; i++) {
-    if (i !== e && Math.random() < 0.78 && !cn.some(c => c.lane === i && Math.abs(c.m.position.z - SZ) < 10)) {
-      addOb(i);
+    var v = input.value.trim();
+    if(!re.test(v)){
+      input.setAttribute('aria-invalid','true');
+      err.textContent = 'Please enter a valid email address.';
+      input.focus();
+      return;
     }
-  }
-}
-function addCoin(l) {
-  const v = 0.5 + Math.random() * 3.5, m = mkCoin(v);
-  m.position.set(LX[l], 1.25, SZ);
-  scene.add(m);
-  cn.push({ m, lane: l, v, ph: Math.random() * 6 });
-}
-
-function pop(pos, txt) {
-  camera.updateMatrixWorld();
-  const v = pos.clone().project(camera);
-  const d = document.createElement('div');
-  d.className = 'pop';
-  d.textContent = '+' + txt + ' R$';
-  const rect = canvas.getBoundingClientRect();
-  d.style.left = (v.x * 0.5 + 0.5) * rect.width + 'px';
-  d.style.top = (-v.y * 0.5 + 0.5) * rect.height + 'px';
-  d.onanimationend = () => d.remove();
-  container.appendChild(d);
-}
-
-/* ---------- Main Frame Animation Loop ---------- */
-function tick(dt, now) {
-  const tgt = state === 'play' ? speed : state === 'over' ? 0 : 11;
-  vis += (tgt - vis) * (1 - Math.exp(-(state === 'over' ? 2.5 : 4) * dt));
-  const d = vis * dt;
-  tt.offset.y += d / TL;
-  gt.offset.y += d / 6;
-
-  bl.forEach(m => {
-    m.position.z += d;
-    if (m.position.z > 30) {
-      m.position.z -= SPAN;
-      m.position.x = (m.position.x < 0 ? -1 : 1) * (8 + Math.random() * 22);
+    input.removeAttribute('aria-invalid');
+    err.textContent = '';
+    var url = OFFER_URL;
+    if(PASS_EMAIL_PARAM){
+      url += (url.indexOf('?') > -1 ? '&' : '?') + encodeURIComponent(PASS_EMAIL_PARAM) + '=' + encodeURIComponent(v);
     }
+    window.location.href = url;
   });
+  input.addEventListener('input', function(){ input.removeAttribute('aria-invalid'); err.textContent = ''; });
 
-  st.forEach(m => {
-    m.position.z += d * 1.4;
-    if (m.position.z > 12) m.position.z = -130;
+  document.getElementById('quickStart').addEventListener('click', function(e){
+    e.preventDefault();
+    document.getElementById('quiz').scrollIntoView({behavior:'smooth', block:'center'});
+    var first = document.querySelector('.step:not([hidden]) .opt, .step:not([hidden]) input');
+    if(first) setTimeout(function(){ first.focus({preventScroll:true}); }, 400);
   });
-
-  // Ship movement
-  const dx = LX[lane] - ship.position.x;
-  ship.position.x += dx * (1 - Math.exp(-14 * dt));
-  ship.position.y = 0.9 + Math.sin(now * 3) * 0.07;
-  body.rotation.z = -dx * 0.22;
-  body.rotation.y = -dx * 0.06;
-  shadow.position.x = ship.position.x;
-  flames.forEach(f => {
-    const s = 1.2 + Math.random() * 0.5 + vis * 0.012;
-    f.scale.set(s, s, 1);
-  });
-
-  // Camera Shake & LookAt
-  shake *= Math.exp(-5 * dt);
-  const fov = 60 + Math.min(9, Math.max(0, (vis - 11) * 0.2));
-  if (Math.abs(fov - camera.fov) > 0.05) {
-    camera.fov = fov;
-    camera.updateProjectionMatrix();
-  }
-  camera.position.set(ship.position.x * 0.55 + (Math.random() - 0.5) * shake, camY + (Math.random() - 0.5) * shake, camZ);
-  camera.lookAt(ship.position.x * 0.3, 0.8, -12);
-
-  if (state === 'play') {
-    speed = Math.min(46, speed + 0.35 * dt);
-    rowT -= d;
-    if (rowT <= 0) {
-      row();
-      rowT = speed * Math.max(0.6, 1.35 - (speed - 16) * 0.025);
-    }
-    coinT -= dt;
-    if (coinT <= 0) {
-      const ls = [0, 1, 2].filter(l => !ob.some(o => o.lane === l && Math.abs(o.m.position.z - SZ) < 10));
-      if (ls.length) {
-        addCoin(ls[Math.random() * ls.length | 0]);
-        coinT = 2 + Math.random() * 2;
-      } else {
-        coinT = 0.3;
-      }
-    }
-    for (const s of [-1, 1]) {
-      emit(ship.position.x + s * 0.35, 0.9, 1.5, Math.random() < 0.5 ? 0x38e1ff : 0xff4fa3, (Math.random() - 0.5) * 0.6, Math.random() * 0.4, 0, 0.35, 0.8, 0);
-    }
-  }
-
-  // Obstacle collision & recycling
-  for (let i = ob.length - 1; i >= 0; i--) {
-    const o = ob[i], p = o.m.position;
-    p.z += d;
-    if (o.orb) {
-      o.m.rotation.x += d / 0.9;
-      p.y = 1.1 + Math.abs(Math.sin(now * 6 + o.ph)) * 0.25;
-    }
-    if (p.z > 14) {
-      scene.remove(o.m);
-      ob.splice(i, 1);
-      continue;
-    }
-    if (state === 'play' && Math.abs(p.z) < 1.3 && Math.abs(p.x - ship.position.x) < 1.2) {
-      crash();
-    }
-  }
-
-  // Coin collision & collection
-  for (let i = cn.length - 1; i >= 0; i--) {
-    const c = cn[i], p = c.m.position;
-    p.z += d;
-    c.m.rotation.y += dt * 3;
-    p.y = 1.25 + Math.sin(now * 3 + c.ph) * 0.18;
-    if (p.z > 14) {
-      scene.remove(c.m);
-      cn.splice(i, 1);
-      continue;
-    }
-    if (state === 'play' && Math.abs(p.z) < 1.6 && Math.abs(p.x - ship.position.x) < 1.3) {
-      score += c.v;
-      sc.textContent = score.toFixed(2);
-      
-      // Real-time synchronization with landing page balance
-      updateWalletDisplay(score);
-
-      const hp = $('sp');
-      hp.classList.remove('bump');
-      void hp.offsetWidth;
-      hp.classList.add('bump');
-      burst(p.x, p.y, p.z, [0x3dffb0, 0xffffff, 0xffe27a], 22, 6);
-      pop(p.clone().add(new THREE.Vector3(0, 1, 0)), c.v.toFixed(2));
-      tone(880, 0.1, 'square', 0.07);
-      setTimeout(() => tone(1320, 0.14, 'square', 0.07), 70);
-      scene.remove(c.m);
-      cn.splice(i, 1);
-    }
-  }
-
-  // Particle simulation
-  P.forEach(p => {
-    if (p.l <= 0) return;
-    p.l -= dt;
-    if (p.l <= 0) { p.m.visible = false; return; }
-    p.vy += p.g * dt;
-    p.m.position.x += p.vx * dt;
-    p.m.position.y = Math.max(0.05, p.m.position.y + p.vy * dt);
-    p.m.position.z += p.vz * dt + d;
-    p.m.scale.setScalar(p.sz * p.l / p.ml);
-    p.m.rotation.x += dt * 6;
-    p.m.rotation.y += dt * 5;
-  });
-}
-
-function frame(t) {
-  requestAnimationFrame(frame);
-  const now = t / 1000, dt = Math.min(now - last || 0, 0.05);
-  last = now;
-  tick(dt, now);
-  renderer.render(scene, camera);
-}
-requestAnimationFrame(frame);
 })();
 </script>
 </body>
